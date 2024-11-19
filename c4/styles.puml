@@ -1,0 +1,43 @@
+@startuml
+
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+!define DEVICONS https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/devicons
+
+!include DEVICONS/aws.puml
+!include DEVICONS/code.puml
+!include DEVICONS/java.puml
+!include DEVICONS/postgresql.puml
+!include DEVICONS/python.puml
+!include DEVICONS/react.puml
+!include DEVICONS/redis.puml
+!include DEVICONS/ruby.puml
+
+<style>
+element {
+    MinimumWidth 250
+    MaximumWidth 250
+}
+queue {
+    MinimumWidth 400
+    MaximumWidth 400
+}
+</style>
+SetDefaultLegendEntries("")
+AddElementTag("person", $fontColor=#FFFFFF, $bgColor="#333333", $borderColor="#000000", $legendText="Person")
+AddElementTag("resource", $fontColor=#FFFFFF, $bgColor="#838996", $borderColor="#000000", $legendText="Resource")
+AddElementTag("service", $fontColor=#FFFFFF, $bgColor="#838996", $borderColor="#000000", $legendText="Service")
+AddElementTag("external_system", $fontColor=#333333, $bgColor="#DCDCDC", $borderColor="#000000", $legendText="External Service")
+AddElementTag("system_boundary", $fontColor=#333333, $bgColor="#F1F1F1", $borderColor="#000000", $legendText="System")
+AddElementTag("container_boundary", $fontColor=#333333, $bgColor="#FFF8DC", $borderColor="#000000", $legendText="Container")
+AddElementTag("component", $fontColor=#333333, $bgColor="#FFE589", $borderColor="#000000", $legendText="Component")
+AddElementTag("application", $fontColor=#FFFFFF, $bgColor="#31AC74", $borderColor="#000000", $legendText="Application")
+AddElementTag("microservice", $fontColor=#FFFFFF, $bgColor="#0096D6", $borderColor="#000000", $legendText="Microservice in Java")
+AddElementTag("database", $fontColor=#FFFFFF, $bgColor="#0066B3", $borderColor="#000000", $legendText="Database")
+AddElementTag("topic", $fontColor=#FFFFFF, $bgColor="#7001B4", $borderColor="#000000", $legendText="Topic in Kafka")
+AddElementTag("cache", $fontColor=#FFFFFF, $bgColor="#CC0000", $borderColor="#000000", $legendText="Cache")
+AddElementTag("aws", $fontColor=#FFFFFF, $bgColor="#FF6600", $borderColor="#000000", $legendText="AWS Service")
+AddElementTag("microservice_in_python", $fontColor=#FFFFFF, $bgColor="#FFC300", $borderColor="#000000", $legendText="Microservice in Python")
+AddRelTag("async", $textColor="#333333", $lineColor="#333333", $lineStyle = DashedLine(), $legendText="Async Call (dashed)")
+UpdateRelStyle($lineColor="#333333", $textColor="#333333")
+
+@enduml

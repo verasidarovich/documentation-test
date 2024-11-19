@@ -1,0 +1,35 @@
+@startuml
+!include  https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+LAYOUT_WITH_LEGEND()
+
+title System Context diagram for our company
+
+Person(customer, "Customer", "A customer of the platform.")
+Person(supportManager, "SupportManager", "A support manager.")
+Person_Ext(user, "User", "A user")
+
+Enterprise_Boundary(c10, "Bank") {
+    System_Ext(c6, "Bank", "Bank description")
+}
+
+Enterprise_Boundary(c0, "Platform") {
+
+    Enterprise_Boundary(c2, "Customer-Facing") {
+        System(application, "Application", "Allows users do actions online.")
+    }
+
+    Enterprise_Boundary(c1, "BackOffice") {
+       System(tool, "Tool", "Tool description")
+       System(processing, "Processing", "Processing description")
+    }
+}
+
+Rel(customer, application, "Uses services ")
+Rel_D(supportManager, tool, "Uses")
+Rel_D(supportManager, processing, "Uses")
+Rel_R(user, c6, "Uses")
+
+Rel_R(c6, c0, "   Uses platform to deal with contracts")
+
+@enduml

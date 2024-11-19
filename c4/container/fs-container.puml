@@ -1,0 +1,150 @@
+@startuml
+
+!include ../styles.puml
+' USE styles.puml FROM A PUBLIC URL IN ORDER TO DISPLAY THE DIAGRAM IN CONFLUENCE
+' !include https://raw.githubusercontent.com//documentation-test/master/c4/styles.puml
+
+title Container Diagram for Out Company
+
+Person(person_customer, Customer, "Customer.")
+
+System_Boundary(system_boundary_our_company, "Our company") {
+    /' MICROSERVICES AND OTHER INTERNAL SERVICES '/
+    /' Monolith, Frontend, microservices and other internal services '/
+
+
+    Container(service_1, "Service 1", "Java 17, Spring Boot 3", "Provides services based on user attributes.", "java", $tags="microservice")
+    Container(service_2, "Service 2", "Java 17, Spring Boot 3", "Provides services for creation and validation of signed JWT tokens.", "java", $tags="microservice")
+    Container(service_3, "AWS API Gateway", "AWS, Gateway Service", "Amazon API Gateway.", "aws", $tags="aws")
+    Container(service_4, "AWS Lambda", "AWS, Serverless Event-Driven Service", "AWS Lambda.", "aws", $tags="aws")
+    Container(service_5, "AWS SES", "AWS", "Amazon Simple Email Service.", "aws", $tags="aws")
+    Container(service_6, "Service 6", "Job, Java 17, Spring Boot 3", "Provides services.", "java", $tags="microservice")
+    Container(service_7, "Service 7", "Ruby 2, Ruby on Rails 6", "Provides services", "ruby", $tags="application")
+    Container(service_8, "Service 8", "Java 17, Spring Boot 3", "Provides services.", "java", $tags="microservice")
+    Container(service_9, "Service 9", "Java 17, Spring Boot 3", "Provides services.", "java", $tags="microservice")
+    Container(container_cronjob, "CronJob", "Kubernetes", "Triggers jobs on a repeating schedule.", "code", $tags="service")
+    Container(service_10, "Service 10", "Job, Java 17, Spring Boot 3", "Provides services.", "java", $tags="microservice")
+    Container(service_11, "Service 11", "Java 17, Spring Boot 3", "Provides services.", "java", $tags="microservice")
+    Container(service_12, "Service 12", "Java 17, Spring Boot 3", "Provides services.", "java", $tags="microservice")
+    Container(service_13, "Service 13", "Java 17, Spring Boot 3", "Connects to API.", "java", $tags="microservice")
+    Container(container_frontend, "Frontend", "TypeScrypt 5, React 17, Redux 4", "Front-facing interface.", "react", $tags="application")
+    Container(container_frontend_bff, "Frontend-BFF", "Java 17, Spring Boot 3", "Backend for Frontend.", "java", $tags="microservice")
+    Container(service_14, "Service 14", "Java 8", "Provides services.", "java", $tags="application")
+    Container(service_15, "Service 15", "Java 17, Spring Boot 3", "Provides services.", "java", $tags="microservice")
+    Container(service_16, "Service 16", "Application", "Provides services.", "code", $tags="application")
+    Container(container_mail_service, "Mail Service", "Java 17, Spring Boot 3", "Provides services to send emails.", "java", $tags="microservice")
+    Container(service_17, "Notification Service", "Java 17, Spring Boot 3", "Provides services for management of notifications.", "java", $tags="microservice")
+
+    Container(service_18, "Service 18", "Perl 5", "Provides services.", "code", $tags="application")
+    Container(service_19, "Service 19", "Java 17, Spring Boot 3", "Provides services.", "java", $tags="microservice")
+    Container(service_20, "Service 20", "Java 17, Spring Boot 3", "Provides services.", "java", $tags="microservice")
+    Container(service_21, "Service 21", "Java 17, Spring Boot 3", "Provides services.", "java", $tags="microservice")
+    Container(service_22, "Service 22", "Java 8, JSF 2, Spring Framework 5", "Provides services.", "java", $tags="application")
+    Container(service_23, "Service 23", "Java 17, Spring Boot 3", "Provides services.", "java", $tags="microservice")
+  
+    Container(service_24, "Service 24", "Java 17, Spring Boot 3", "Provides services.", "java", $tags="microservice")
+    Container(service_25, "Service 25", "Java 17, Spring Boot 3", "Provides services.", "java", $tags="microservice")
+   
+    Container(service_26, "Service 26", "Java 11, Spring Boot 2", "Provides services.", "java", $tags="microservice")
+    Container(service_27, "Service 27", "Python 3", "Provides services.", "python", $tags="microservice_in_python")
+    Container(service_28, "Service 28", "Java 17, Spring Boot 3", "Provides services.", "java", $tags="microservice")
+    Container(container_web, "Container_web", "Java 8, Spring Framework 5", "Provides many services.", "java", $tags="application")
+     
+    /' DATABASES AND OTHER STORAGES '/
+    ContainerDb(containerdb_aws_efs, "AWS EFS", "AWS, File Storage", "Amazon Elastic File System. Cloud storage for files.", "aws", $tags="aws")
+    ContainerDb(containerdb_aws_s3, "AWS S3", "AWS, Object Storage", "Amazon Simple Storage Service. Cloud storage for objects.", "aws", $tags="aws")
+    ContainerDb(containerdb_redis, "REDIS CLUSTER", "NoSQL Key/Value Store, Redis 6", "Stores cached data used by microservices.", "redis", $tags="cache")
+}
+
+/' EXTERNAL SERVICES '/
+System_Ext(system_ext_1, "Ext service 1.", "Description of ext service 1.")
+System_Ext(system_ext_2, "Ext service 2.", "Description of ext service 2.")
+System_Ext(system_ext_3, "Ext service 3.", "Description of ext service 3.")
+System_Ext(system_ext_4, "Ext service 4.", "Description of ext service 4.")
+System_Ext(system_ext_5, "Ext service 5.", "Description of ext service 5.")
+System_Ext(system_ext_6, "Ext service 6.", "Description of ext service 6.")
+System_Ext(system_ext_7, "Ext service 7.", "Description of ext service 7.")
+System_Ext(system_ext_8, "Ext service 8.", "Description of ext service 8.")
+System_Ext(system_ext_9, "Ext service 9.", "Description of ext service 9.")
+System_Ext(system_ext_10, "Ext service 10.", "Description of ext serfvice 10.")
+System_Ext(system_ext_11, "Ext service 11.", "Description of ext service 11.")
+System_Ext(system_ext_12, "Ext service 12.", "Description of ext service 12.")
+System_Ext(system_ext_13, "Ext service 13.", "Description of ext service 13.")
+System_Ext(system_ext_15, "Ext service 15.", "Description of ext service 15.")
+System_Ext(system_ext_16, "Ext service 16.", "Description of ext service 16.")
+System_Ext(system_ext_17, "Ext service 16.", "Description of ext service 16.")
+
+/' INTERACTIONS '/
+BiRel(service_1, container_web, "Calls", "sync, REST, JSON/HTTPS")
+Rel(service_3, service_4, "Executes", "")
+Rel(service_4, container_mail_service, "Execute JAR", "")
+Rel_L(service_5, containerdb_aws_s3, "Persist Emails", "S3/HTTPS")
+Rel(service_7, service_22, "Calls", "sync, REST, JSON/HTTPS")
+Rel(service_7, containerdb_aws_s3, "Persist/Retrieve Files", "S3/HTTPS")
+BiRel_D(service_7, system_ext_6, "Calls", "sync, REST, JSON/HTTPS")
+Rel_U(service_8, service_28, "Calls", "sync, REST, JSON/HTTPS")
+Rel(service_8, container_web, "Calls", "sync, REST, JSON/HTTPS")
+Rel_U(container_cronjob, service_1, "Triggers Job")
+Rel_U(container_cronjob, service_6, "Triggers Job")
+Rel(container_cronjob, service_10, "Triggers Job")
+
+Rel_L(container_cronjob, service_13, "Triggers Job")
+Rel(container_cronjob, service_20, "Triggers Job")
+Rel(service_11, system_ext_4, "Calls", "sync, REST, JSON/HTTPS")
+Rel(service_12, system_ext_3, "Calls", "sync, REST, JSON/HTTPS")
+Rel(service_13, system_ext_7, "Calls", "sync, REST, JSON/HTTPS")
+
+Rel(container_frontend, container_frontend_bff, "Calls", "sync, REST, JSON/HTTPS")
+Rel_D(container_frontend, service_14, "Calls", "sync, JavaScript/HTTPS")
+Rel(container_frontend, container_web, "Calls", "sync, REST, JSON/HTTPS")
+Rel(container_frontend_bff, service_1, "Calls", "sync, REST, JSON/HTTPS")
+Rel(container_frontend_bff, service_2, "Calls", "sync, REST, JSON/HTTPS")
+Rel(container_frontend_bff, service_6, "Calls", "sync, REST, JSON/HTTPS")
+Rel(container_frontend_bff, service_8, "Calls", "sync, REST, JSON/HTTPS")
+Rel(container_frontend_bff, service_11, "Calls", "sync, REST, JSON/HTTPS")
+Rel(container_frontend_bff, service_12, "Calls", "sync, REST, JSON/HTTPS")
+Rel(container_frontend_bff, service_17, "Calls", "sync, REST, JSON/HTTPS")
+Rel_D(container_frontend_bff, service_21, "Calls", "sync, REST, JSON/HTTPS")
+Rel_R(container_frontend_bff, service_25, "Calls", "sync, REST, JSON/HTTPS")
+Rel(container_frontend_bff, container_web, "Calls", "sync, REST, JSON/HTTPS")
+Rel(service_15, containerdb_redis, "Persist/Retrieve Data", "RESP/TCP")
+Rel(service_10, container_web, "Calls", "sync, REST, JSON/HTTPS")
+Rel(service_10, system_ext_2, "Calls", "sync, REST, JSON/HTTPS")
+Rel_R(container_mail_service, system_ext_12, "Calls", "sync, REST, JSON/HTTPS")
+
+Rel(service_18, containerdb_aws_efs, "Persist/Retrieve Files", "NFS/TCP")
+Rel(service_18, containerdb_aws_s3, "Retrieve Emails", "S3/HTTPS")
+BiRel_R(service_19, container_web, "Calls", "sync, REST, JSON/HTTPS")
+Rel(service_20, system_ext_15, "Calls", "sync, REST, JSON/HTTPS")
+Rel_D(service_21, containerdb_aws_s3, "Persist/Retrieve Files", "S3/HTTPS")
+BiRel_D(service_21, container_web, "Calls", "sync, REST, JSON/HTTPS")
+Rel(service_21, service_25, "Calls", "sync, REST, JSON/HTTPS")
+Rel_L(service_23, containerdb_redis, "Persist/Retrieve Data", "RESP/TCP")
+Rel_D(service_23, system_ext_16, "Calls", "sync, REST, JSON/HTTPS, XML/HTTPS")
+Rel(service_24, containerdb_redis, "Persist/Retrieve Data", "RESP/TCP")
+BiRel(service_25, container_web, "Calls", "sync, REST, JSON/HTTPS")
+Rel(service_26, containerdb_redis, "Persist/Retrieve Data", "RESP/TCP")
+Rel_R(service_26, system_ext_16, "Calls", "sync, REST, JSON/HTTPS, XML/HTTPS")
+Rel_D(container_web, system_ext_9, "Calls", "sync, REST, JSON/HTTPS")
+Rel_L(container_web, system_ext_13, "Calls", "sync, REST, JSON/HTTPS")
+
+Rel_D(service_26, system_ext_1, "Calls", "sync, REST, JSON/HTTPS")
+Rel_U(service_15, system_ext_10, "Calls", "sync, REST, JSON/HTTPS")
+Rel_U(container_web, service_2, "Calls", "sync, REST, JSON/HTTPS")
+Rel(container_web, service_7, "Calls", "sync, REST, JSON/HTTPS")
+Rel_L(container_web, service_14, "Calls", "sync, REST, JSON/HTTPS")
+
+Rel(container_web, service_18, "Calls", "sync, SOAP, XML/HTTPS")
+Rel(container_web, service_26, "Calls", "sync, REST, JSON/HTTPS")
+Rel(container_web, containerdb_aws_s3, "Persist/Retrieve Files", "S3/HTTPS")
+Rel(container_web, system_ext_8, "Calls", "sync, REST, JSON/HTTPS")
+Rel(container_web, system_ext_11, "Calls", "sync, REST, JSON/HTTPS")
+Rel(container_web, system_ext_15, "Calls", "sync, REST, JSON/HTTPS")
+Rel(container_web, system_ext_17, "Calls", "sync, REST, JSON/HTTPS")
+Rel(person_customer, container_frontend, "Uses", "HTTPS")
+Rel(system_ext_5, container_web, "Calls", "sync, REST, JSON/HTTPS")
+Rel(system_ext_12, service_3, "Calls", "sync, REST, JSON/HTTPS")
+
+SHOW_LEGEND()
+
+@enduml

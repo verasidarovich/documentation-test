@@ -1,0 +1,107 @@
+@startuml
+
+!include ../styles.puml
+' USE styles.puml FROM A PUBLIC URL IN ORDER TO DISPLAY THE DIAGRAM IN CONFLUENCE
+' !include https://raw.githubusercontent.com//documentation/master/c4/styles.puml
+
+title Component Diagram for Service 1
+
+Person(person_customer, Customer, "Customer.")
+
+System_Boundary(system_boundary_our_company, "Our company") {
+    ' Default containers
+    Container(container_web, "Container Web", "Java 8, Spring Framework 5, PostgreSQL 12, Kafka 2.6", "Provides many services.", "java", $tags="application")
+    Container(container_frontend, "Frontend", "TypeScrypt 5, React 17, Redux 4", "Front-facing interface for desktop and mobile.", "react", $tags="application")
+    Container(container_frontend_bff, "Frontend-BFF", "Java 17, Spring Boot 3", "Backend for Frontend used by Frontend to connect to microservices.", "java", $tags="microservice")
+
+    ' Bank accounts aggregator boundary
+    Container_Boundary(container_1_boundary, "Service 1") {
+        Component(component_topic_1_message_listener, "Topic 1 Message Listener", "Java 17, Spring Boot 3, Kafka 2.6", "Consumes messages.", "java", $tags="component")
+        Component(component_topic_2_message_listener, "Topic 2 Message Listener", "Java 17, Spring Boot 3, Kafka 2.6", "Consumes messages.", "java", $tags="component")
+        Component(component_topic_3_message_listener, "Topic 3 Message Listener", "Java 17, Spring Boot 3, Kafka 2.6", "Consumes messages.", "java", $tags="component")
+        Component(component_topic_4_message_listener, "Topic 4 Message Listener", "Java 17, Spring Boot 3, Kafka 2.6", "Consumes messages.", "java", $tags="component")
+        Component(component_1, "Component 1", "Java 17, Spring Boot 3, PostgreSQL 12", "Component 1.", "java", $tags="component")
+        Component(component_2, "Component 2", "Java 17, Spring Boot 3, PostgreSQL 12, Kafka 2.6", "Component 2.", "java", $tags="component")
+    }
+
+    ' Database
+    ContainerDb(containerdb, "DB", "RDBMS, PostgreSQL 12", "Stores data.", "postgresql", $tags="database")
+    ' Connector
+    Container(component_connector, "Service", "Java 17, Spring Boot 3, PostgreSQL 12, Kafka 2.6", "Description.", "java", $tags="microservice")
+
+    ' Consumers
+    ContainerQueue(containerqueue_topic_1, "Description of data stored in the topic 1", "<env>.queueing.topic-name", "Topic description.", $tags="topic")
+    ContainerQueue(containerqueue_topic_2, "Description of data stored in the topic 2", "<env>.queueing.topic-name", "Topic description.", $tags="topic")
+    ' Producers
+    ContainerQueue(containerqueue_topic_3, "Description of data stored in the topic 3", "<env>.queueing.topic-name", "Topic description.", $tags="topic")
+    ContainerQueue(containerqueue_topic_4, "Description of data stored in the topic 4", "<env>.queueing.topic-name", "Topic description.", $tags="topic")
+    ContainerQueue(containerqueue_topic_5, "Description of data stored in the topic 5", "<env>.queueing.topic-name", "Topic description.", $tags="topic")
+    ContainerQueue(containerqueue_topic_6, "Description of data stored in the topic 6", "<env>.queueing.topic-name", "Topic description.", $tags="topic")
+    ContainerQueue(containerqueue_topic_7, "Description of data stored in the topic 7", "<env>.queueing.topic-name", "Topic description.", $tags="topic")
+    ContainerQueue(containerqueue_topic_8, "Description of data stored in the topic 8", "<env>.queueing.topic-name", "Topic description.", $tags="topic")
+    ContainerQueue(containerqueue_topic_9, "Description of data stored in the topic 9", "<env>.queueing.topic-name", "Topic description.", $tags="topic")
+    ContainerQueue(containerqueue_topic_10, "Description of data stored in the topic 10", "<env>.queueing.topic-name", "Topic description.", $tags="topic")
+}
+
+Lay_D(container_1_boundary, container_web)
+Lay_D(component_topic_4_message_listener, component_1)
+Lay_D(containerdb, containerqueue_topic_9)
+Lay_D(containerdb, containerqueue_topic_8)
+Lay_D(containerdb, containerqueue_topic_10)
+Lay_D(containerdb, containerqueue_topic_1)
+Lay_D(containerdb, containerqueue_topic_2)
+Lay_D(containerdb, containerqueue_topic_3)
+Lay_D(containerdb, containerqueue_topic_4)
+Lay_D(containerdb, containerqueue_topic_6)
+Lay_D(containerdb, containerqueue_topic_7)
+Lay_D(containerdb, containerqueue_topic_5)
+Lay_D(containerdb, component_connector)
+Lay_D(component_connector, containerqueue_topic_9)
+Lay_D(component_connector, containerqueue_topic_8)
+Lay_D(component_connector, containerqueue_topic_10)
+Lay_D(component_connector, containerqueue_topic_1)
+Lay_D(component_connector, containerqueue_topic_2)
+Lay_D(component_connector, containerqueue_topic_3)
+Lay_D(component_connector, containerqueue_topic_4)
+Lay_D(component_connector, containerqueue_topic_6)
+Lay_D(component_connector, containerqueue_topic_7)
+Lay_D(component_connector, containerqueue_topic_5)
+
+Rel_D(person_customer, container_frontend, "Uses", "HTTPS")
+Rel_D(container_frontend, container_frontend_bff, "Description", "sync, REST, JSON/HTTPS")
+' Frontend-bff to bank service
+Rel_D(container_frontend_bff, component_1, "Actions description", "sync, REST, JSON/HTTPS")
+Rel_D(container_frontend_bff, component_1, "Actions description", "sync, REST, JSON/HTTPS")
+Rel_D(container_frontend_bff, component_1, "Actions description", "sync, REST, JSON/HTTPS")
+Rel_D(container_frontend_bff, component_2, "Actions description", "sync, REST, JSON/HTTPS")
+Rel_D(container_frontend_bff, component_2, "Actions description", "sync, REST, JSON/HTTPS")
+' Access to database
+Rel_D(component_1, containerdb, "CRUD for banks and authentication to connector data", "SQL/TCP")
+Rel_D(component_2, containerdb, "CRUD for account data", "SQL/TCP")
+' Access to connectors
+Rel_R(component_1, component_connector, "Authenticates user at the bank", "sync, REST, JSON/HTTPS")
+' Bank Accounts Aggregator Producer
+Rel_D(component_2, containerqueue_topic_3, "Produces message", "async, JSON, Binary/TCP", $tags="async")
+Rel_D(component_2, containerqueue_topic_4, "Produces message", "async, JSON, Binary/TCP", $tags="async")
+Rel_D(component_2, containerqueue_topic_5, "Produces message", "async, JSON, Binary/TCP", $tags="async")
+Rel_D(component_2, containerqueue_topic_6, "Produces message", "async, JSON, Binary/TCP", $tags="async")
+Rel_D(component_2, containerqueue_topic_7, "Produces message", "async, JSON, Binary/TCP", $tags="async")
+Rel_D(component_2, containerqueue_topic_9, "Produces message", "async, JSON, Binary/TCP", $tags="async")
+' Other producers
+Rel_D(container_web, containerqueue_topic_1, "Produces message", "async, JSON, Binary/TCP", $tags="async")
+Rel_U(component_connector, containerqueue_topic_2, "Produces message", "async, JSON, Binary/TCP", $tags="async")
+Rel_U(component_connector, containerqueue_topic_8, "Produces message", "async, JSON, Binary/TCP", $tags="async")
+Rel_U(component_connector, containerqueue_topic_10, "Produces message", "async, JSON, Binary/TCP", $tags="async")
+' Consumers
+Rel_D(component_topic_2_message_listener, containerqueue_topic_1, "Consumes message", "async, JSON, Binary/TCP", $tags="async")
+Rel_R(component_topic_1_message_listener, containerqueue_topic_2, "Consumes message", "async, JSON, Binary/TCP", $tags="async")
+Rel_D(component_topic_3_message_listener, containerqueue_topic_8, "Consumes message", "async, JSON, Binary/TCP", $tags="async")
+Rel_D(component_topic_4_message_listener, containerqueue_topic_10, "Consumes message", "async, JSON, Binary/TCP", $tags="async")
+' Consumers to Services
+Rel_D(component_topic_2_message_listener, component_2, "Delete user data", "")
+Rel_D(component_topic_1_message_listener, component_2, "Store accounts", "")
+Rel_D(component_topic_3_message_listener, component_2, "Process transactions", "")
+
+SHOW_LEGEND()
+
+@enduml
